@@ -1,0 +1,29 @@
+---
+title: "Seatbelts"
+author: "Siddharth Jain"
+date: "5 February 2019"
+output: rmarkdown::github_document
+---
+## Seatbelts Dataset
+```{r}
+
+data("Seatbelts")
+Seatbelts <- data.frame(Year=floor(time(Seatbelts)),Month = factor(cycle(Seatbelts)), Seatbelts)
+```
+#### 10 Variables:
+```{r}
+str(Seatbelts)
+```
+#### Splitting data into before and after introduction of seatbelt legislation: 
+#### We do so based on the 'law' variable (0 for before, 1 for after)
+```{r}
+BeforeLaw <- Seatbelts[Seatbelts$law ==0,]
+AfterLaw <- Seatbelts[Seatbelts$law ==1,]
+
+summary(BeforeLaw)
+
+summary(AfterLaw)
+
+library(ggplot2)
+ggplot(Seatbelts, aes(x=factor(law), y=DriversKilled)) + geom_boxplot(fill="mediumpurple3") + theme_grey() +ylab("Monthly Driver Mortality") + xlab("Before and After seatbelt law")
+```
