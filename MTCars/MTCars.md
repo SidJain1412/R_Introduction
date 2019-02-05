@@ -30,7 +30,7 @@ dim(mtcars)
 #### We can see that heavier cars have worse mileage
 
 ``` r
-plot(mtcars$wt, mtcars$mpg, type="p")
+plot(mtcars$wt, mtcars$mpg, type="p", xlab="Weight", ylab="Miles Per Gallon")
 ```
 
 ![](MTCars_files/figure-markdown_github/unnamed-chunk-2-1.png)

@@ -16,5 +16,5 @@ dim(mtcars)
 ### Plotting relation between weight of car and miles per gallon
 #### We can see that heavier cars have worse mileage
 ```{r}
-plot(mtcars$wt, mtcars$mpg, type="p")
+plot(mtcars$wt, mtcars$mpg, type="p", xlab="Weight", ylab="Miles Per Gallon")
 ```
