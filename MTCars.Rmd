@@ -1,0 +1,20 @@
+---
+title: "MTCars"
+author: "Siddharth Jain"
+date: "5 February 2019"
+output: rmarkdown::github_document
+---
+# MT Cars dataset
+
+```{r}
+data("mtcars")
+head(mtcars)
+
+dim(mtcars)
+
+```
+### Plotting relation between weight of car and miles per gallon
+#### We can see that heavier cars have worse mileage
+```{r}
+plot(mtcars$wt, mtcars$mpg, type="p")
+```
