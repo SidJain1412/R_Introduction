@@ -13,9 +13,9 @@ print(summary(df))
 
 start(df)
 
-plot(df)
+plot(df, ylab="Number of passengers", xlab="Year")
 
-plot(aggregate(df,FUN=mean))
+plot(aggregate(df,FUN=mean), ylab = "Total number of passengers", xlab="Year")
 
-boxplot(df~cycle(df))
+boxplot(df~cycle(df), xlab="Month", ylab="Number of passengers")
 ```

@@ -23,19 +23,19 @@ start(df)
     ## [1] 1949    1
 
 ``` r
-plot(df)
+plot(df, ylab="Number of passengers", xlab="Year")
 ```
 
 ![](AirPassengers_files/figure-markdown_github/unnamed-chunk-1-1.png)
 
 ``` r
-plot(aggregate(df,FUN=mean))
+plot(aggregate(df,FUN=mean), ylab = "Total number of passengers", xlab="Year")
 ```
 
 ![](AirPassengers_files/figure-markdown_github/unnamed-chunk-1-2.png)
 
 ``` r
-boxplot(df~cycle(df))
+boxplot(df~cycle(df), xlab="Month", ylab="Number of passengers")
 ```
 
 ![](AirPassengers_files/figure-markdown_github/unnamed-chunk-1-3.png)
