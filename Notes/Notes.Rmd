@@ -178,9 +178,23 @@ Character vectors in data frame are stored as factor
 class(measrmts$gender)
 ```
 
+## Importing data
+Use the `read.csv()` function to read 'comma separated value' (.csv) files.
+
+This function also reads the headers (column names). To read without column names, use `read.table()`
+
+`head` function is used to display first 5 rows, similarly `tail` for last 5.
+```{r}
+my_data = read.csv("test.csv")
+print(head(my_data))
+```
+Use `read.delim()` to read a .txt file
 
 
-
+`write.csv()` and `write.delim()` can be used to write a file.
+```{r}
+write.csv(measrmts, file="measurements.csv")
+```
 
 
 

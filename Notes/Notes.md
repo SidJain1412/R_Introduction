@@ -112,13 +112,13 @@ x <- rnorm(5)
 print(x)
 ```
 
-    ## [1]  2.6128856 -0.1196916  1.2634455 -1.3799652 -1.4460968
+    ## [1]  0.4134183  1.1264617 -1.5703808  0.9855681 -0.7841961
 
 ``` r
 print(sum(x))
 ```
 
-    ## [1] 0.9305775
+    ## [1] 0.1708711
 
 Other built in arithmetic functions
 
@@ -258,3 +258,33 @@ class(measrmts$gender)
 ```
 
     ## [1] "factor"
+
+Importing data
+--------------
+
+Use the `read.csv()` function to read 'comma separated value' (.csv) files.
+
+This function also reads the headers (column names). To read without column names, use `read.table()`
+
+`head` function is used to display first 5 rows, similarly `tail` for last 5.
+
+``` r
+my_data = read.csv("test.csv")
+print(head(my_data))
+```
+
+    ##   age first_name gender
+    ## 1  41       Evan   Male
+    ## 2  62       Bill   Male
+    ## 3  50      Craig   Male
+    ## 4  62      Polly Female
+    ## 5  53    Gabriel Female
+    ## 6  61      Bruce Female
+
+Use `read.delim()` to read a .txt file
+
+`write.csv()` and `write.delim()` can be used to write a file.
+
+``` r
+write.csv(measrmts, file="measurements.csv")
+```
