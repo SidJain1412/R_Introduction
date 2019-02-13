@@ -76,7 +76,7 @@ Some important Data Structures in R:
 5.  Data Frames (each component of same length)
 6.  Factors (Used to store categorical data)
 
-### R Data Types
+#### R Data Types
 
 -   Logical (TRUE, FALSE)
 -   Numeric (12.3, 5, 1)
@@ -105,7 +105,47 @@ print(typeof(a))
 
     ## [1] "double"
 
-#### Matrix ,list
+Creating a random vector with 5 elements, printing its sum
+
+``` r
+x <- rnorm(5)
+print(x)
+```
+
+    ## [1]  2.6128856 -0.1196916  1.2634455 -1.3799652 -1.4460968
+
+``` r
+print(sum(x))
+```
+
+    ## [1] 0.9305775
+
+Other built in arithmetic functions
+
+-   sum() for total sum of vector
+-   var() for variation
+-   mean() for mean of the vector
+-   min() and max() to find minimum and maximum elements
+
+Sequences in R
+
+``` r
+x <- seq(1, 5)
+print(x)
+```
+
+    ## [1] 1 2 3 4 5
+
+`by` attribute can be passed to seq function to create steps
+
+``` r
+y <- seq(-1, 0, by=0.1)
+print(y)
+```
+
+    ##  [1] -1.0 -0.9 -0.8 -0.7 -0.6 -0.5 -0.4 -0.3 -0.2 -0.1  0.0
+
+#### Matrices
 
 Creating a 3x3 matrix in R
 
@@ -159,3 +199,62 @@ print(length(m))
 ```
 
     ## [1] 6
+
+#### Lists
+
+Collections of mixed type data objects
+
+The objects in a list are known as its components
+
+Example
+
+``` r
+lst <- list(name = "Sid", height = "6", num_children = 3, child_ages = c(6, 7, 9))
+print(lst[[1]])
+```
+
+    ## [1] "Sid"
+
+``` r
+print(lst$height)
+```
+
+    ## [1] "6"
+
+To print 1st component of child\_ages
+
+``` r
+print(lst[[4]][1])
+```
+
+    ## [1] 6
+
+#### Data Frames
+
+Similar to matrix, may contain categorical as well as numerical data.
+
+It is like a list with components as columns of a table.
+
+``` r
+measrmts <- data.frame(gender = c("F", "M", "M"), ht = c(180, 155, 165), wt = c(60, 80, 75))
+print(measrmts)
+```
+
+    ##   gender  ht wt
+    ## 1      F 180 60
+    ## 2      M 155 80
+    ## 3      M 165 75
+
+``` r
+print(measrmts[1, 2])
+```
+
+    ## [1] 180
+
+Character vectors in data frame are stored as factor
+
+``` r
+class(measrmts$gender)
+```
+
+    ## [1] "factor"
