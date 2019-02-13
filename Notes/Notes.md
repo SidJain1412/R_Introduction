@@ -112,13 +112,13 @@ x <- rnorm(5)
 print(x)
 ```
 
-    ## [1]  0.4134183  1.1264617 -1.5703808  0.9855681 -0.7841961
+    ## [1]  1.02478594 -0.05663616 -0.68189719 -0.09722344 -0.25271093
 
 ``` r
 print(sum(x))
 ```
 
-    ## [1] 0.1708711
+    ## [1] -0.06368178
 
 Other built in arithmetic functions
 
@@ -281,6 +281,14 @@ print(head(my_data))
     ## 5  53    Gabriel Female
     ## 6  61      Bruce Female
 
+Dimension of the data using `dim` keyword. Rows then columns.
+
+``` r
+print(dim(my_data))
+```
+
+    ## [1] 10  3
+
 Use `read.delim()` to read a .txt file
 
 `write.csv()` and `write.delim()` can be used to write a file.
@@ -288,3 +296,33 @@ Use `read.delim()` to read a .txt file
 ``` r
 write.csv(measrmts, file="measurements.csv")
 ```
+
+Statistics
+----------
+
+2 subdivisions of statistical methods:
+
+1.  Descriptive
+    -   Deals with presentation of numerical data in tables/ graphs.
+    -   Methodology of analysing the data.
+2.  Inferential
+    -   Making inferences about the whole data based on observations from samples.
+
+#### Descriptive Statistics
+
+2 general types of statistics used to describe data: + Measures of central tendency (mean, median, mode) + Measure of spread (range, quartiles, absolute and standard deviation, variance)
+
+Mean: Average of the data Median: Middle score for data arranged in order of magnitude Mode: Most frequent value in data Variance: *Mean of squares* of *deviations from mean* of the data Standard Deviation: *Square root* of variance
+
+Useful keywords for descriptive analysis of data:
+
+-   `summary()` : summarize all aatributes of a dataset.
+-   `dim()` : display dimensions of the dataset.
+-   `sapply()` : apply a function to each attribute of a dataset.
+    -   `sapply(df, sd)` to find standard deviation for all attributes
+-   `cor()` : to calculate correlation matrix (read about Pearson's correlation coefficient)
+-   `mean()`
+-   `median()`
+-   `range()` : returns minimum and maxiumum
+-   `var()` : variance
+-   `sd()` : standard deviation

@@ -188,6 +188,10 @@ This function also reads the headers (column names). To read without column name
 my_data = read.csv("test.csv")
 print(head(my_data))
 ```
+Dimension of the data using `dim` keyword. Rows then columns.
+```{r}
+print(dim(my_data))
+```
 Use `read.delim()` to read a .txt file
 
 
@@ -196,5 +200,36 @@ Use `read.delim()` to read a .txt file
 write.csv(measrmts, file="measurements.csv")
 ```
 
+## Statistics
 
+2 subdivisions of statistical methods:
 
+1. Descriptive
+    + Deals with presentation of numerical data in tables/ graphs.
+    + Methodology of analysing the data.
+2. Inferential
+    + Making inferences about the whole data based on observations from samples.
+
+#### Descriptive Statistics
+2 general types of statistics used to describe data:
++ Measures of central tendency (mean, median, mode)
++ Measure of spread (range, quartiles, absolute and standard deviation, variance)
+
+Mean: Average of the data
+Median: Middle score for data arranged in order of magnitude
+Mode: Most frequent value in data
+Variance: *Mean of squares* of *deviations from mean* of the data
+Standard Deviation: *Square root* of variance
+
+Useful keywords for descriptive analysis of data:
+
++ `summary()` : summarize all aatributes of a dataset.
++ `dim()` : display dimensions of the dataset.
++ `sapply()` : apply a function to each attribute of a dataset.
+    - `sapply(df, sd)` to find standard deviation for all attributes
++ `cor()` : to calculate correlation matrix (read about Pearson's correlation coefficient)
++ `mean()`
++ `median()`
++ `range()` : returns minimum and maxiumum
++ `var()` : variance
++ `sd()` : standard deviation
