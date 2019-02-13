@@ -112,13 +112,13 @@ x <- rnorm(5)
 print(x)
 ```
 
-    ## [1]  1.02478594 -0.05663616 -0.68189719 -0.09722344 -0.25271093
+    ## [1] -1.47487816  0.53441773  0.60331040 -0.98224634 -0.09056856
 
 ``` r
 print(sum(x))
 ```
 
-    ## [1] -0.06368178
+    ## [1] -1.409965
 
 Other built in arithmetic functions
 
@@ -326,3 +326,74 @@ Useful keywords for descriptive analysis of data:
 -   `range()` : returns minimum and maxiumum
 -   `var()` : variance
 -   `sd()` : standard deviation
+
+Exploratory Data Analysis
+-------------------------
+
+We can use a ton of plots to visualize our data.
+
+R has many datasets inbuilt, or installed with ggplot2 (`install.packages("ggplot2")`).
+
+Let us use the Diamond dataset.
+
+Importing `ggplot2` library for datasets and plotting functions.
+
+``` r
+library('ggplot2')
+```
+
+Storing the `diamonds` dataset into `df` dataframe variable
+
+``` r
+df <- diamonds
+print(dim(df))
+```
+
+    ## [1] 53940    10
+
+``` r
+print(head(df))
+```
+
+    ## # A tibble: 6 x 10
+    ##   carat cut       color clarity depth table price     x     y     z
+    ##   <dbl> <ord>     <ord> <ord>   <dbl> <dbl> <int> <dbl> <dbl> <dbl>
+    ## 1 0.23  Ideal     E     SI2      61.5    55   326  3.95  3.98  2.43
+    ## 2 0.21  Premium   E     SI1      59.8    61   326  3.89  3.84  2.31
+    ## 3 0.23  Good      E     VS1      56.9    65   327  4.05  4.07  2.31
+    ## 4 0.290 Premium   I     VS2      62.4    58   334  4.2   4.23  2.63
+    ## 5 0.31  Good      J     SI2      63.3    58   335  4.34  4.35  2.75
+    ## 6 0.24  Very Good J     VVS2     62.8    57   336  3.94  3.96  2.48
+
+Bar plot
+
+``` r
+ggplot(data = df) + geom_bar(mapping = (aes(x = cut)))
+```
+
+![](Notes_files/figure-markdown_github/unnamed-chunk-19-1.png) Histogram
+
+``` r
+ggplot(data = diamonds) + geom_histogram(mapping = aes(x = carat), binwidth = 0.5)
+```
+
+![](Notes_files/figure-markdown_github/unnamed-chunk-20-1.png)
+
+#### Visualizing a single variable
+
+Many functions such as:
+
+-   `plot(data)`: Scatterplot where x is index, y is value
+-   `barplot(data)`: Bar plot
+-   `dotchart(data)`: Cleveland dot plot
+-   `hist(data)`: Histogram
+-   `plot(density(data))`: Density ploy (continuous histogram)
+-   `rug(data)`: Add a 1D rug representation to existing plot
+
+Arugments `xlab` and `ylab` can be passed to a plot to add a label
+
+``` r
+plot(my_data$age, ylab = "Age", xlab = "People")
+```
+
+![](Notes_files/figure-markdown_github/unnamed-chunk-21-1.png)

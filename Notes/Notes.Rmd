@@ -233,3 +233,44 @@ Useful keywords for descriptive analysis of data:
 + `range()` : returns minimum and maxiumum
 + `var()` : variance
 + `sd()` : standard deviation
+
+## Exploratory Data Analysis
+We can use a ton of plots to visualize our data.
+
+R has many datasets inbuilt, or installed with ggplot2 (`install.packages("ggplot2")`).
+
+Let us use the Diamond dataset.
+
+Importing `ggplot2` library for datasets and plotting functions.
+```{r}
+library('ggplot2')
+```
+Storing the `diamonds` dataset into `df` dataframe variable
+```{r}
+df <- diamonds
+print(dim(df))
+print(head(df))
+```
+Bar plot
+```{r}
+ggplot(data = df) + geom_bar(mapping = (aes(x = cut)))
+```
+Histogram
+```{r}
+ggplot(data = diamonds) + geom_histogram(mapping = aes(x = carat), binwidth = 0.5)
+```
+
+#### Visualizing a single variable
+Many functions such as:
+
++ `plot(data)`: Scatterplot where x is index, y is value
++ `barplot(data)`: Bar plot
++ `dotchart(data)`: Cleveland dot plot
++ `hist(data)`: Histogram
++ `plot(density(data))`: Density ploy (continuous histogram)
++ `rug(data)`: Add a 1D rug representation to existing plot
+
+Arugments `xlab` and `ylab` can be passed to a plot to add a label
+```{r}
+plot(my_data$age, ylab = "Age", xlab = "People")
+```
