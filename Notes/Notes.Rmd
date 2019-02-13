@@ -63,10 +63,27 @@ Gather, collect, store, batch process, and serve data to data scientists.
 Some important Data Structures in R:
 
 1. Vector (similar types of data)
-2. Matrix (2 or more dimensional)
+2. Matrix (2 dimensional)
 3. List (data of mixed types)
+4. Array (vector with one or more dimensions)
 4. Data Frames (each component of same length)
 5. Factors (Used to store categorical data)
+
+#### R Data Types
+
+* Logical (TRUE, FALSE)
+* Numeric (12.3, 5, 1)
+* Integer (2L, 34L, 0L)
+* Complex (3+2i)
+* Character ('a', "Hello")
+* Raw (Use charToRaw to convert to ASCII values)
+
+Everything in R is an object, and objects have attributes (identifiers).
+
+* Name
+* Dimension names (```dimnames```)
+* Class
+* Length
 
 #### Vectors
 Use the ```c``` keyword to concatenate items into a vector.
@@ -89,3 +106,23 @@ result <- array(c(vector1,vector2),dim = c(3,3), dimnames = list(colnames,rownam
 
 print(result)
 ```
+Creating an empty 2x3 matrix
+```{r}
+m = matrix(0.0, nrow=2, ncol=3) # 2x3
+print(m)
+```
+Checking the class of the object
+```{r}
+print(class(m))
+```
+Checking type of values
+```{r}
+print(typeof(m))
+```
+Checking length
+```{r}
+print(length(m))
+```
+
+
+

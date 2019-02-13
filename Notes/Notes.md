@@ -70,10 +70,27 @@ R Programming
 Some important Data Structures in R:
 
 1.  Vector (similar types of data)
-2.  Matrix (2 or more dimensional)
+2.  Matrix (2 dimensional)
 3.  List (data of mixed types)
-4.  Data Frames (each component of same length)
-5.  Factors (Used to store categorical data)
+4.  Array (vector with one or more dimensions)
+5.  Data Frames (each component of same length)
+6.  Factors (Used to store categorical data)
+
+### R Data Types
+
+-   Logical (TRUE, FALSE)
+-   Numeric (12.3, 5, 1)
+-   Integer (2L, 34L, 0L)
+-   Complex (3+2i)
+-   Character ('a', "Hello")
+-   Raw (Use charToRaw to convert to ASCII values)
+
+Everything in R is an object, and objects have attributes (identifiers).
+
+-   Name
+-   Dimension names (`dimnames`)
+-   Class
+-   Length
 
 #### Vectors
 
@@ -107,3 +124,38 @@ print(result)
     ## Col1    2   10   13
     ## Col2    9   16   11
     ## Col3    3   17   15
+
+Creating an empty 2x3 matrix
+
+``` r
+m = matrix(0.0, nrow=2, ncol=3) # 2x3
+print(m)
+```
+
+    ##      [,1] [,2] [,3]
+    ## [1,]    0    0    0
+    ## [2,]    0    0    0
+
+Checking the class of the object
+
+``` r
+print(class(m))
+```
+
+    ## [1] "matrix"
+
+Checking type of values
+
+``` r
+print(typeof(m))
+```
+
+    ## [1] "double"
+
+Checking length
+
+``` r
+print(length(m))
+```
+
+    ## [1] 6
