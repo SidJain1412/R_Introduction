@@ -1,0 +1,26 @@
+---
+title: "R Analysis of Titanic Dataset"
+author: "Siddharth Jain"
+date: "02 March 2019"
+output: rmarkdown::github_document
+---
+
+## Introduction
+We are analysing the various factors determining survival rates on the Titanic disaster. To do this, we will use various different features available about the passengers and visualize them.
+
+### Importing the data
+```{r}
+test = read.csv('test.csv', stringsAsFactors = FALSE)
+train = read.csv('train.csv', stringsAsFactors = FALSE)
+head(test)
+```
+### Visualizing missing data in the dataset
+```{r}
+library("naniar")
+vis_miss(train)
+```
+Age has many missing values.
+```{r}
+library(ggplot2)
+ggplot(data=train[1:dim(train)[1],],aes(x=Sex,fill=Survived))+geom_bar()+ theme_classic()
+```
