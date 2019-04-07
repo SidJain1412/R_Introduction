@@ -10,17 +10,95 @@ We are analysing the various factors determining survival rates on the Titanic d
 
 ### Importing the data
 ```{r}
+library("naniar")
+library("ggplot2"); theme_set(theme_minimal())
+library("dplyr")
+library("tidyr")
 test = read.csv('test.csv', stringsAsFactors = FALSE)
 train = read.csv('train.csv', stringsAsFactors = FALSE)
-head(test)
+full <- bind_rows(train,test)
+LT=dim(train)[1]
+head(LT)
 ```
+
+```{r}
+str(full)
+```
+
 ### Visualizing missing data in the dataset
 ```{r}
-library("naniar")
 vis_miss(train)
 ```
-Age has many missing values.
+
 ```{r}
-library(ggplot2)
-ggplot(data=train[1:dim(train)[1],],aes(x=Sex,fill=Survived))+geom_bar()+ theme_classic()
+missing_values <- full %>% summarize_all(funs(sum(is.na(.))/n()))
+missing_values <- gather(missing_values, key="feature", value="MissingPercentage")
+
+missing_values %>% 
+
+  ggplot(aes(x=reorder(feature,-MissingPercentage),y=MissingPercentage)) +
+
+  geom_bar(stat="identity",fill="red")+
+
+  coord_flip()+theme_bw()
+```
+
+Age has many missing values.
+
+
+### Taking care of missing Age values
+Replacing the missing values with the mean age of all the passengers on the Titanic
+```{r}
+full <- full %>%
+
+    mutate(
+
+      Age = ifelse(is.na(Age), mean(full$Age, na.rm=TRUE), Age),
+
+      `Age Group` = case_when(Age < 13 ~ "Age.00.12", 
+
+                                 Age >= 13 & Age < 18 ~ "Age.13.17",
+
+                                 Age >= 18 & Age < 60 ~ "Age.18.59",
+
+                                 Age >= 60 ~ "Age.60.Ov"))
+```
+
+### Relationship between sex and survival, and subsequently between age and survival
+```{r}
+ggplot(data=full[1:LT,],aes(x=Sex,fill=Survived))+geom_bar()
+
+# First we'll look at the relationship between age & survival
+ggplot(full[1:891,], aes(Age, fill = factor(Survived))) + 
+  geom_histogram() + 
+  # Including gender since we know it's important
+  facet_grid(.~Sex) + 
+  theme_minimal()
+```
+
+### Survival rate based on family size
+```{r}
+full$Fsize <- full$SibSp + full$Parch + 1
+full$Family <- paste(full$Surname, full$Fsize, sep='_')
+# Use ggplot2 to visualize the relationship between family size & survival
+ggplot(full[1:891,], aes(x = Fsize, fill = factor(Survived))) +
+  geom_bar(stat='count', position='dodge') +
+  scale_x_continuous(breaks=c(1:11)) +
+  labs(x = 'Family Size') +
+  theme_minimal()
+```
+
+We can see that single people and families with size>4 had lower survival rates.
+
+
+### Making a random forest model
+```{r}
+library('randomForest')
+rf_model <- randomForest(factor(Survived) ~ Pclass + Sex + Age + SibSp + Parch + 
+                                            Fare + Embarked,
+                                            data = train, na.action = na.roughfix)
+
+# Show model error
+plot(rf_model, ylim=c(0,0.36))
+legend('topright', colnames(rf_model$err.rate), col=1:3, fill=1:3)
 ```
