@@ -112,13 +112,13 @@ x <- rnorm(5)
 print(x)
 ```
 
-    ## [1] -2.08644684  0.90464732 -0.10038301  0.07266515 -0.02743576
+    ## [1] 0.3400470 1.6940916 1.6187131 1.6910530 0.8869005
 
 ``` r
 print(sum(x))
 ```
 
-    ## [1] -1.236953
+    ## [1] 6.230805
 
 Other built in arithmetic functions
 
@@ -310,9 +310,21 @@ Statistics
 
 #### Descriptive Statistics
 
-2 general types of statistics used to describe data: + Measures of central tendency (mean, median, mode) + Measure of spread (range, quartiles, absolute and standard deviation, variance)
+2 general types of statistics used to describe data:
 
-Mean: Average of the data Median: Middle score for data arranged in order of magnitude Mode: Most frequent value in data Variance: *Mean of squares* of *deviations from mean* of the data Standard Deviation: *Square root* of variance
+-   Measures of central tendency (mean, median, mode)
+
+-   Measure of spread (range, quartiles, absolute and standard deviation, variance)
+
+Mean: Average of the data
+
+Median: Middle score for data arranged in order of magnitude
+
+Mode: Most frequent value in data
+
+Variance: *Mean of squares* of *deviations from mean* of the data
+
+Standard Deviation: *Square root* of variance
 
 Useful keywords for descriptive analysis of data:
 

@@ -212,14 +212,21 @@ write.csv(measrmts, file="measurements.csv")
 
 #### Descriptive Statistics
 2 general types of statistics used to describe data:
+
 + Measures of central tendency (mean, median, mode)
+
 + Measure of spread (range, quartiles, absolute and standard deviation, variance)
 
 Mean: Average of the data
+
 Median: Middle score for data arranged in order of magnitude
+
 Mode: Most frequent value in data
+
 Variance: *Mean of squares* of *deviations from mean* of the data
+
 Standard Deviation: *Square root* of variance
+
 
 Useful keywords for descriptive analysis of data:
 
