@@ -72,6 +72,9 @@ str(full)
 vis_miss(train)
 ```
 
+    ## Warning: The `printer` argument is deprecated as of rlang 0.3.0.
+    ## This warning is displayed once per session.
+
 ![](EDA_files/figure-markdown_github/unnamed-chunk-3-1.png)
 
 ``` r
@@ -148,3 +151,16 @@ ggplot(full[1:891,], aes(x = Fsize, fill = factor(Survived))) +
 ![](EDA_files/figure-markdown_github/unnamed-chunk-7-1.png)
 
 We can see that single people and families with size&gt;4 had lower survival rates.
+
+### Making a random forest model
+
+``` r
+##library('randomForest')
+##rf_model <- randomForest(factor(Survived) ~ Pclass + Sex + Age + SibSp + Parch + 
+                                 ##           Fare + Embarked,
+                              ##              data = train, na.action = na.roughfix)
+
+# Show model error
+##plot(rf_model, ylim=c(0,0.36))
+##legend('topright', colnames(rf_model$err.rate), col=1:3, fill=1:3)
+```

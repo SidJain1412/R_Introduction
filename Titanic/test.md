@@ -1,7 +1,7 @@
 R Analysis of Titanic Dataset
 ================
-Siddharth Jain
-02 March 2019
+Adwitiya Singh
+9/10/2019
 
 0. Introduction
 ---------------
@@ -12,10 +12,10 @@ Siddharth Jain
 ------------
 
 ``` r
-library(randomForest) # random Forest
-library(party)        # conditional inference trees and forests
-library(e1071)        # support vector machine
-library(ggplot2)      # nice plots
+library("naniar")
+library("ggplot2"); theme_set(theme_minimal())
+library("dplyr")
+library("tidyr")
 ```
 
 2. Check the data
@@ -54,17 +54,21 @@ nrow(allData[!complete.cases(allData),])
 
     ## [1] 264
 
+### Visualizing missing data in the dataset
+
+``` r
+vis_miss(allData)
+```
+
+    ## Warning: The `printer` argument is deprecated as of rlang 0.3.0.
+    ## This warning is displayed once per session.
+
+![](test_files/figure-markdown_github/unnamed-chunk-4-1.png)
+
 2. Handling missing values
 --------------------------
 
 Missing values can usually be delt with three ways: listwise deletion, multiple imputation and rational approaches. Since the missing values here are in the test dataset and the corresponding features are by intuition quite relevant to the prediction, a rational approach is employed to fill the missings. For `Fare`, the single missing value is replaced with the median of the Fare in the associated `Pclass`, which are actually highly correlated.
-
-``` r
-# correlation
-cor(allData[!is.na(allData$Fare),]$Pclass,allData[!is.na(allData$Fare),]$Fare)
-```
-
-    ## [1] -0.5586287
 
 ``` r
 # boxplot
@@ -73,14 +77,14 @@ ggplot(data = allData,aes(x=factor(Pclass),y=Fare,fill=factor(Pclass))) + geom_b
 
     ## Warning: Removed 1 rows containing non-finite values (stat_boxplot).
 
-![](test_files/figure-markdown_github/unnamed-chunk-4-1.png)
+![](test_files/figure-markdown_github/unnamed-chunk-5-1.png)
 
 ``` r
 # replace missing
 allData[is.na(allData$Fare),]$Fare <-  median(allData[allData$Pclass==3,]$Fare,na.rm = TRUE)
 ```
 
-For the feature `Age`, in the Kaggle forum many use multiple imputation from the package `mice`: `imp <- mice(allData,seed = 123)`. On the other hand, the missing value is often replaced by the median age in the corresponding `Title` class. `Title` is a derived feature from the `Name` variable. Since `Title` and `Age` has some sort of correlation, it is hence reasonable to infer the age in this fasion, which may be even more appropriate.
+The missing value is often replaced by the median age in the corresponding `Title` class. `Title` is a derived feature from the `Name` variable. Since `Title` and `Age` has some sort of correlation, it is hence reasonable to infer the age in this fasion, which may be even more appropriate.
 
 Let's first creat the `Title` feature.
 
@@ -112,21 +116,27 @@ sum(is.na(allData))
 
     ## [1] 0
 
-3. Feature Selection
---------------------
-
-Feature selection is a key but tricky step in the learning process, involving many "blank arts" and domain knowledge. In this exercise, very simple feature selection strategy is adopted. Besides the `Title` that was already extracted from the `Name`, family size is another frequently used feature in Kaggle forum, which is the sum of `SibSp` and `Parch`.
+### Relationship between sex and survival, and subsequently between age and survival
 
 ``` r
-allData$FamilySize <- allData$Parch + allData$SibSp +1
+LT=dim(trainData)[1]
+
+ggplot(data=trainData[1:LT,],aes(x=Sex,fill=Survived))+geom_bar()
 ```
 
-Not all features are useful in the prediction, e.g., `PassengerID`,`Name`, while some are redundant, `SibSp`,`Parch`. Finally, 7 features are retained for this exercise and the corresponding train and test datasets are created.
+![](test_files/figure-markdown_github/unnamed-chunk-9-1.png)
 
 ``` r
-myfeatures <- c('Pclass','Sex','Age','Fare','Embarked','Title','FamilySize')
-allData$Pclass <- factor(allData$Pclass) # as factor
-allData$Title <- factor(allData$Title)   # as factor
-train <- cbind(allData[1:nrow(trainData),myfeatures],trainData['Survived'])
-test <- allData[(nrow(trainData)+1):nrow(allData),myfeatures]
+# First we'll look at the relationship between age & survival
+ggplot(trainData[1:891,], aes(Age, fill = factor(Survived))) + 
+  geom_histogram() + 
+  # Including gender since we know it's important
+  facet_grid(.~Sex) + 
+  theme_minimal()
 ```
+
+    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+
+    ## Warning: Removed 177 rows containing non-finite values (stat_bin).
+
+![](test_files/figure-markdown_github/unnamed-chunk-9-2.png)
